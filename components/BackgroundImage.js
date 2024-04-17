@@ -5,7 +5,7 @@ import {Text, View, Pressable, TextInput, Button, ImageBackground, Image, StyleS
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
-const BackgroundImg = () => {
+const BackgroundImg = ({ navigation }) => {
     return(
         <View>
             
@@ -22,10 +22,18 @@ const BackgroundImg = () => {
                 <Text style={styles.txt1}>CENTRE</Text>
                 <Text style={styles.txt1}>TOOLKIT</Text>
                 {/* <Button style={styles.button1}>Hellow</Button> */}
-                <Pressable style={styles.button1} >
+                <Pressable style={styles.button1} 
+                    onPress={() =>
+                        navigation.navigate('Register')
+                      }
+                >
                     <Text style={styles.text1}>Register</Text>
                 </Pressable>
-                <Pressable style={styles.button2} >
+                <Pressable style={styles.button2} 
+                    onPress={() =>
+                        navigation.navigate('Login')
+                      }
+                >
                     <Text style={styles.text2}>Login</Text>
                 </Pressable>
             </ImageBackground> 
