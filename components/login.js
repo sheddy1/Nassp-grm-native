@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { Text, TextInput, Pressable, Button, StyleSheet, View, Image} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Login = ({ navigation }) => {
+
+    // state ={
+    //     data:[]
+    // }
+
+    // fetchData = async () => {
+    //     const res = await fetch('http://localhost:4547/users');
+    //     const users = await response.json();
+    //     this.setState({data: users});
+    // };
+
+    // componentDidMount(this.fetchData());
+
     return(
         <SafeAreaView>
             
@@ -15,7 +28,12 @@ const Login = ({ navigation }) => {
                 <Image source={require('./images/back.png')}  style={styles.back}/>
             </Pressable>
 
-            <Text style={styles.loginHeader}>Log In</Text>
+            {/* data = {this.stat.data}
+            renderItem={({item}) =>
+                <Text style={styles.loginHeader}>{item.name}</Text>
+            } */}
+
+            
 
             <View style={styles.loginEmail}>
                 <Text style={styles.loginEmailHead}>Email</Text>
@@ -35,9 +53,7 @@ const Login = ({ navigation }) => {
             </View>
 
             <Pressable style={styles.loginButton}
-                onPress={() =>
-                    navigation.navigate('Home')
-                }
+                onPress={() => navigation.navigate('GrmForm')}
             >
                 <Text style={styles.loginButtonTxt}>LOG IN</Text>
             </Pressable>

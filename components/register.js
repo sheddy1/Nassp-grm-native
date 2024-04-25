@@ -4,6 +4,7 @@ import { Text, TextInput, Pressable, Button, StyleSheet, View, Image} from "reac
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import axios from 'axios';
+import { Axios } from 'axios';
 
 const Register = ({ navigation }) => {
 
@@ -16,16 +17,41 @@ const Register = ({ navigation }) => {
     const [phone, setPhone] = useState('');
     const [phoneVerify, setPhoneVerify] = useState(false);
 
-    function handleSubmit(){
+    const [showPAssword, setShowPassword] = useState(false);
+
+    function handleSubmit() {
+
+
         const userData={
             email:email, 
-            password,
-            phone,
+            password: password,
+            phone: phone,
         };
+        // alert(phone);
+        
 
-        axios.post("http://192.168.175.108:3000/register", userData)
-        .then(res => console.log(res.data)) 
-        .catch(e=>console.log(e));
+        // const insert = axios
+        //     .post('http://192.168.186.108:5001/register', userData)
+        //     .then(res => console.log(res.data)) 
+        //     .catch(e=>console.log(e));
+
+        const insert = fetch('http://192.168.186.108:5001/register', {
+            method: 'POST',
+            body: JSON.stringify(userData),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => console.log(data));
+
+        if (insert )
+        {
+            alert ("data has been inserted")
+        }
+        else{
+            alert("there was an error")
+        }
     }
 
     function handleEmail(e){
@@ -34,7 +60,7 @@ const Register = ({ navigation }) => {
         setEmail(emailVar);
         setEmailVerify(false);
         if(/^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(emailVar)){
-            setEmailVerify(emailVar);
+            setEmail(emailVar);
             setEmailVerify(true);
         }
     }
@@ -44,9 +70,11 @@ const Register = ({ navigation }) => {
         const passwordVar=e.nativeEvent.text;
         setPassword(passwordVar);
         setPasswordVerify(false);
-        if(passwordVar.length>1)
+        if(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(passwordVar))
         {
-            setPasswordVerify(true)
+            setPassword(passwordVar);
+            setPasswordVerify(true);
+
         }
     }
 
@@ -55,10 +83,22 @@ const Register = ({ navigation }) => {
         const phoneVar=e.nativeEvent.text;
         setPhone(phoneVar);
         setPhoneVerify(false);
-        if(phoneVar.length>1)
+        if(/[6-9]{1}[0-9]{9}/.test(phoneVar))
         {
+            setPhone(phoneVar);
             setPhoneVerify(true)
         }
+    }
+
+    userRegister = () =>{
+        //alert('ok');
+        const {email} = this.state;
+        const {password} = this.state;
+        const {phone} = this.state;
+
+        fetch('server link', {
+
+        })
     }
 
     return(
@@ -80,6 +120,7 @@ const Register = ({ navigation }) => {
                     style={styles.loginEmailInput}
                     placeholder="Email Address"
                     onChange={e => handleEmail(e)}
+                    // onChangeText = {email => this.setState({email})}
                 />
                 {email.length < 1?null : emailVerify?(<Text style={styles.verify1} > Valid Email</Text>)
                 : (<Text  style={styles.verify2}  >Invalid Email</Text>)}
@@ -92,6 +133,7 @@ const Register = ({ navigation }) => {
                     style={styles.loginEmailInput}
                     placeholder="Enter Password"
                     onChange={e => handlePassword(e)}
+                    // onChangeText = {password => this.setState({password})}
                 />
                 {password.length < 1?null : passwordVerify?(<Text style={styles.verify1} > Valid Name</Text>)
                 : (<Text  style={styles.verify2}  >Invalid Name</Text>)}
@@ -103,9 +145,11 @@ const Register = ({ navigation }) => {
                     style={styles.loginEmailInput}
                     placeholder="Phone Number"
                     onChange={e => handlePhone(e)}
+                    maxLength={11}
+                    // onChangeText = {phone => this.setState({phone})}
                 />
-                {phone.length < 1?null : phoneVerify?(<Text style={styles.verify1} > Valid Name</Text>)
-                : (<Text  style={styles.verify2}  >Invalid Name</Text>)}
+                {phone.length < 1?null : phoneVerify?(<Text style={styles.verify1} > Valid Phone Number</Text>)
+                : (<Text  style={styles.verify2}  >Invalid Phone Number</Text>)}
             </View>
 
             <Pressable style={styles.loginButton}

@@ -1,58 +1,73 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
 
-const app = express();
 
-const connection = mysql.createPool({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'grm_system'
+
+var express = require('express');
+var app = express();
+var mongo = require('mongodb').MongoClient;
+const mongoose = require("mongoose");
+app.use(express.json());
+
+
+const mongoUrl = "mongodb+srv://sheddy:sheddy12345@cluster0.nulxirh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+mongoose.connect(mongoUrl).then(()=>{
+    console.log("database connected");
+}).catch((e) => {
+    console.log(e);
 });
 
-connection.getConnection(function (err, connection) {
-    console.log("Database connected")
+//requiring user UserDetailSchema
+require('./UserDetails'); 
+
+const User =mongoose.model("UserInfo");
+
+app.get("/", (req,res)=>{
+    res.send({status:"started"})
 })
 
-// app.get("/",(req,res)=>{
-//     res.send({status: "started"});
-// });
+app.get('/data', (req, res)=>{
+  mongoose.connect(mongoUrl, (err, db)=>{
+      var collection = db.collection('users');
+      collection.find({}).toArray((x, hasil)=>{
+          res.send(hasil);
+      })
+  })
+})
 
-app.get('/users', function (req, res) {
-    // Connecting to the database.
-    connection.getConnection(function (err, connection) {
 
-    // Executing the MySQL query (select all data from the 'users' table).
-    connection.query('SELECT * FROM users', function (error, results, fields) {
-      // If some error occurs, we throw an error.
-      if (error) throw error;
 
-      // Getting the 'response' from the database and sending it to our route. This is were the data is.
-      res.send(results)
-    });
-  });
+//registration api
+// app.post('/register', async(req, res) => {
+  // const {email, password, phone} = req.body;
+
+  // const oldUSer = await User.findOne({email:email});
+
+  // if(oldUser){
+  //   return res.send({data: "User already exists"});
+  // }
+
+  // try {
+  //   await User.create({
+  //     email:email,
+  //     password,
+  //     phone
+  //   });
+  //   res.send({status:"ok", data:"User has been created yu dey whine"});
+  // } catch (error) {
+  //   res.send({status: "error", data: error});
+  // }
+// })
+
+//registration api
+const db = "test";
+app.post('/register', (req, res) => {
+  console.log(req.body);
+  db.collection('userinfos').insertOne(req.body, (err, data) => {
+      if(err) return console.log(err);
+      res.send(('saved to db: ' + data));
+  })
 });
 
-app.post('/register',async(req,res)=>{
-    const {email, password, phone}=req.body;
-
-    con.connect(function(err) {
-        if (err) throw err;
-        var sql = "INSERT INTO customers (email, password, phone) VALUES ('Company Inc', 'Highway 37', 0706557506)";
-        con.query(sql, function (err, result) {
-          if (err) throw err;
-          console.log("1 record inserted");
-        });
-      });
+app.listen(5001,()=>{
+    console.log("Node don start sha")
 });
-
-
-
-app.listen(3000, () => {
-    console.log('Go to http://localhost:3000/users so you can see the data.');
-   });
-
-// app.listen(3000, () => {
-//     console.log('Go to http://localhost:3000/users so you can see the data.');
-//    });
