@@ -19,10 +19,41 @@ const Register = ({ navigation }) => {
 
     const [showPAssword, setShowPassword] = useState(false);
 
+    // Register = () => {
+
+    //     let InsertAPIURL = "https://localhost/nassp-grm-native/api/insert.php";
+
+    //     let headers ={
+    //         'Accept' : 'application/json',
+    //         'Content-Type' : 'application/json' 
+    //     };
+
+    //     let Data = {
+    //         email: email,
+    //         password: password,
+    //         phone: phone
+    //     }
+
+    //     fetch(InsertAPIURL, {
+    //         method: 'POST',
+    //         header: headers,
+    //         body : JSON.stringify(Data)
+    //     })
+    //     .then((response)=> response.json())
+    //     .then((response) =>{
+    //         alert(response[0].Message);
+    //     })
+    //     .catch((error) => {
+    //         alert((error) => {
+    //             alert("Error" + error);
+    //         })
+    //     })
+    // }
+
     function handleSubmit() {
 
 
-        const userData={
+        const userData ={
             email:email, 
             password: password,
             phone: phone,
@@ -35,23 +66,35 @@ const Register = ({ navigation }) => {
         //     .then(res => console.log(res.data)) 
         //     .catch(e=>console.log(e));
 
-        const insert = fetch('http://192.168.186.108:5001/register', {
+        // const insert = 
+        fetch('https://192.168.20.108:3306/nassp-grm-native/api/insert.php', {
             method: 'POST',
             body: JSON.stringify(userData),
             headers: {
                 'Content-Type': 'application/json'
             },
         })
-        .then(res => res.json())
-        .then(data => console.log(data));
+        // .then((response)=> response.json())
+        .then((response) =>{
+            alert(response[0].Message);
+        })
+        .catch((error) => {
+            alert((error) => {
+                alert("Error" + error);
+            })
+        })
 
-        if (insert )
-        {
-            alert ("data has been inserted")
-        }
-        else{
-            alert("there was an error")
-        }
+        // alert(res);
+
+        // alert()
+
+        // if (!insert )
+        // {
+        //     alert ("data has been inserted")
+        // }
+        // else{
+        //     alert("there was an error")
+        // }
     }
 
     function handleEmail(e){

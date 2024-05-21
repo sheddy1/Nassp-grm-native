@@ -8,6 +8,7 @@ import Register from '../components/register';
 import GrmForm from '../components/grmForm';
 import GrievanceRegister from '../components/grievanceRegister';
 import NsrRegister from '../components/nsrRegister';
+import SavedForm from '../components/savedForm';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const Home = () => {
                 <Stack.Screen name="GrmForm" component={GrmForm} />
                 <Stack.Screen name="GrievanceRegister" component={GrievanceRegister} />
                 <Stack.Screen name="NsrRegister" component={NsrRegister} />
+                <Stack.Screen name="SavedForm" component={SavedForm} />
             </Stack.Navigator>
         </NavigationContainer>
         

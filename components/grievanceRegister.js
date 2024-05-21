@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Text, TextInput, Pressable, Button, StyleSheet, View, Image, ScrollView } from "react-native";
+import { Text, TextInput, Pressable, Button, StyleSheet, View, Image, ScrollView, TextArea } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { Dropdown } from 'react-native-element-dropdown';
+import Textarea from 'react-native-textarea';
 // import AntDesign from '@expo/vector-icons/AntDesign';
 // import { ScrollView } from 'react-native-gesture-handler';
 
@@ -33,7 +34,7 @@ const GrievanceRegister = ({ navigation }) => {
                         navigation.navigate('GrmForm')
                     }
                     >
-                        <Image source={require('./images/back.png')}  style={styles.Back2}/>
+                        <Image source={require('./images/back1.png')}  style={styles.Back2}/>
                     </Pressable>
                     <Text style={styles.headerBoxTxt}>GRIEVANCE REGISTRATION FORM</Text>
                 </View>
@@ -77,7 +78,26 @@ const GrievanceRegister = ({ navigation }) => {
                 </View>
 
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>WARD</Text>
+
+                    <Dropdown
+                        style={styles. dropdown}
+                        data={options}
+                        search
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder="WARD"
+                        value={selectedValue}
+                        onChange={item => {
+                        setSelectedValue(item.value);
+                        }}
+                    />
+                    
+                </View>
+
+                <View style={styles.lga}>
+                    <Text style={styles.StateTxt}>COMMUNITY</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -96,7 +116,7 @@ const GrievanceRegister = ({ navigation }) => {
                 </View>
 
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>IS BENEFICIARY</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -105,7 +125,7 @@ const GrievanceRegister = ({ navigation }) => {
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder="LGA"
+                        placeholder="BENEFICIARY"
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
@@ -114,10 +134,11 @@ const GrievanceRegister = ({ navigation }) => {
                     
                 </View>
 
+                {/* // complaint nsr number */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>COMPLAINT NSR NO.</Text>
 
-                    <Dropdown
+                    {/* <Dropdown
                         style={styles. dropdown}
                         data={options}
                         search
@@ -128,51 +149,39 @@ const GrievanceRegister = ({ navigation }) => {
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
-                        }}
-                    />
+                        }} */}
+
+                <TextInput 
+                    style={styles.dropdownText}
+                    placeholder="NSR NUmber"
+                />
                     
                 </View>
-
+                
+                {/* complaint name */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>COMPLAINT NAME</Text>
 
-                    <Dropdown
-                        style={styles. dropdown}
-                        data={options}
-                        search
-                        maxHeight={300}
-                        labelField="label"
-                        valueField="value"
-                        placeholder="LGA"
-                        value={selectedValue}
-                        onChange={item => {
-                        setSelectedValue(item.value);
-                        }}
+                    <TextInput 
+                        style={styles.dropdownText}
+                        placeholder="Full Name"
                     />
-                    
                 </View>
 
+                {/* complaint PHONE */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>COMPLAINT PHONE</Text>
 
-                    <Dropdown
-                        style={styles. dropdown}
-                        data={options}
-                        search
-                        maxHeight={300}
-                        labelField="label"
-                        valueField="value"
-                        placeholder="LGA"
-                        value={selectedValue}
-                        onChange={item => {
-                        setSelectedValue(item.value);
-                        }}
+                    <TextInput 
+                        style={styles.dropdownText}
+                        placeholder="Phone Number"
                     />
                     
                 </View>
 
+                {/* GENDER */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>GENDER</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -181,7 +190,7 @@ const GrievanceRegister = ({ navigation }) => {
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder="LGA"
+                        placeholder="GENDER"
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
@@ -189,9 +198,10 @@ const GrievanceRegister = ({ navigation }) => {
                     />
                     
                 </View>
-
+                
+                {/* CATEGORY */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>CATEGORY</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -200,7 +210,7 @@ const GrievanceRegister = ({ navigation }) => {
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder="LGA"
+                        placeholder="CATEGORY"
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
@@ -209,8 +219,9 @@ const GrievanceRegister = ({ navigation }) => {
                     
                 </View>
 
+                {/* SUB CATEGORY */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>SUB CATEGORY</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -219,7 +230,7 @@ const GrievanceRegister = ({ navigation }) => {
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder="LGA"
+                        placeholder="SUB CATEGORY"
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
@@ -227,28 +238,21 @@ const GrievanceRegister = ({ navigation }) => {
                     />
                     
                 </View>
-
+                
+                {/* AGE */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>AGE</Text>
 
-                    <Dropdown
-                        style={styles. dropdown}
-                        data={options}
-                        search
-                        maxHeight={300}
-                        labelField="label"
-                        valueField="value"
-                        placeholder="LGA"
-                        value={selectedValue}
-                        onChange={item => {
-                        setSelectedValue(item.value);
-                        }}
+                    <TextInput 
+                        style={styles.dropdownText}
+                        placeholder="AGE"
                     />
                     
                 </View>
 
+                {/* complaint MODE */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>COMPLAINT MODE</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -257,7 +261,7 @@ const GrievanceRegister = ({ navigation }) => {
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder="LGA"
+                        placeholder="COMPLAINT MODE"
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
@@ -266,8 +270,9 @@ const GrievanceRegister = ({ navigation }) => {
                     
                 </View>
 
+                {/* complaint EMAIL */}
                 <View style={styles.lga}>
-                    <Text style={styles.StateTxt}>LGA</Text>
+                    <Text style={styles.StateTxt}>COMPLAINT EMAIL</Text>
 
                     <Dropdown
                         style={styles. dropdown}
@@ -276,7 +281,7 @@ const GrievanceRegister = ({ navigation }) => {
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder="LGA"
+                        placeholder="EMAIL ADDRESS"
                         value={selectedValue}
                         onChange={item => {
                         setSelectedValue(item.value);
@@ -285,7 +290,61 @@ const GrievanceRegister = ({ navigation }) => {
                     
                 </View>
 
+                {/* RESOLVED */}
                 <View style={styles.lga}>
+                    <Text style={styles.StateTxt}>RESOLVED?</Text>
+
+                    <Dropdown
+                        style={styles. dropdown}
+                        data={options}
+                        search
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder="YES OR NO"
+                        value={selectedValue}
+                        onChange={item => {
+                        setSelectedValue(item.value);
+                        }}
+                    />
+                    
+                </View>
+
+                {/* RESOLVED COMMENT */}
+                <View style={styles.lga1}>
+                    <Text style={styles.StateTxt}>RESOLVED COMMENT</Text>
+
+                    <Textarea
+                        containerStyle={styles.dropdownTextArea}
+                        // style={styles.textarea}
+                        onChangeText={this.onChange}
+                        // defaultValue={this.state.text}
+                        maxLength={120}
+                        placeholder={'How was it resolved'}
+                        placeholderTextColor={'#c7c7c7'}
+                        underlineColorAndroid={'transparent'}
+                    />
+                    
+                </View>
+
+                {/* DESCRIPTION OF PROBLEM */}
+                <View style={styles.lga2}>
+                    <Text style={styles.StateTxt}>DESCRIPTION</Text>
+
+                    <Textarea
+                        containerStyle={styles.dropdownTextArea}
+                        // style={styles.textarea}
+                        onChangeText={this.onChange}
+                        // defaultValue={this.state.text}
+                        maxLength={120}
+                        placeholder={'How was it resolved'}
+                        placeholderTextColor={'#c7c7c7'}
+                        underlineColorAndroid={'transparent'}
+                    />
+                    
+                </View>
+
+                <View style={styles.lga2}>
                     <Text style={styles.StateTxt}>LGA</Text>
 
                     <Dropdown
@@ -304,7 +363,7 @@ const GrievanceRegister = ({ navigation }) => {
                     
                 </View>
 
-                <View style={styles.lga}>
+                <View style={styles.lga2}>
                     <Text style={styles.StateTxt}>LGA</Text>
 
                     <Dropdown
@@ -323,7 +382,7 @@ const GrievanceRegister = ({ navigation }) => {
                     
                 </View>
 
-                <View style={styles.lga}>
+                <View style={styles.lga2}>
                     <Text style={styles.StateTxt}>LGA</Text>
 
                     <Dropdown
@@ -341,6 +400,10 @@ const GrievanceRegister = ({ navigation }) => {
                     />
                     
                 </View>
+
+                
+
+                
             </ScrollView>
         </SafeAreaView>
     )
@@ -364,9 +427,9 @@ const styles = StyleSheet.create({
     Back1:{
         width: 15,
         height: 15,
-        top: 6,
-        left: 5,
-        backgroundColor: 'red',
+        top: 9,
+        left: 10,
+        // backgroundColor: 'red',
     },
     headerBox:{
         height: 35,
@@ -403,9 +466,10 @@ const styles = StyleSheet.create({
 
     StateTxt: {
         color: "#052600",
-        fontSize: 17,
+        fontSize: 13,
         top: 8,
         left: 15,
+        fontWeight: '700'
     },
 
     StateSelect: {
@@ -424,8 +488,8 @@ const styles = StyleSheet.create({
         borderBlockColor: '#052600',
         borderWidth: 1,
         color: 'white',
-        width: 230,
-        left: 110,
+        width: 180,
+        left: 160,
         top: -25,
         height: 40,
         fontSize: 10.,
@@ -437,9 +501,42 @@ const styles = StyleSheet.create({
         // backgroundColor: 'blue',
     },
 
-    ward: {
-        top: 10,
-        height: 40,
+    lga1: {
+        top: 20,
+        height: 100,
         // backgroundColor: 'blue',
     },
+
+    lga2: {
+        top: 40,
+        height: 120,
+        // backgroundColor: 'blue',
+    },
+
+
+    dropdownText:{
+        borderWidth: 1,
+        color: 'white',
+        width: 180,
+        left: 160,
+        top: -25,
+        height: 40,
+        fontSize: 15.,
+    },
+
+    dropdownTextArea:{
+        borderWidth: 1,
+        color: 'white',
+        width: 180,
+        left: 160,
+        top: -25,
+        height: 90,
+        fontSize: 15.,
+    },
+
+    // ward: {
+    //     top: 10,
+    //     height: 40,
+    //     // backgroundColor: 'blue',
+    // },
 });

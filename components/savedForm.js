@@ -3,21 +3,27 @@ import React from 'react';
 import { Text, TextInput, Pressable, Button, StyleSheet, View, Image} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'; 
 
-const GrmForm = ({ navigation }) => {
+const SavedForm = ({ navigation }) => {
     return(
         <SafeAreaView >
-            <Text style={styles.header}>Grievance center</Text>
+            <Pressable
+                onPress={ () =>  
+                    navigation.navigate('GrmForm')
+                }
+            >
+                <Text style={styles.header}>Grievance center</Text>
+            </Pressable>
             <View style={styles.headerView}>
+                <Text style={styles.headerViewFormTxt}>GRM FORM</Text>
                 <View style={styles.headerViewForm}>
-                    <Text style={styles.headerViewFormTxt}>GRM FORM</Text>
+                    <Pressable
+                        onPress={ () =>  
+                            navigation.navigate('Saved Form')
+                        }
+                    >
+                        <Text style={styles.headerViewSavedTxt}>SAVED FORM</Text>
+                    </Pressable>
                 </View>
-                <Pressable
-                    onPress={ () =>  
-                        navigation.navigate('SavedForm')
-                    }
-                >
-                    <Text style={styles.headerViewSavedTxt}>SAVED FORM</Text>
-                </Pressable>
                 <Pressable
                     onPress={ () =>  
                         navigation.navigate('GrievanceRegister')
@@ -27,28 +33,14 @@ const GrmForm = ({ navigation }) => {
                 </Pressable>          
             </View>
 
-            <Pressable style={styles.grievance}
-                    onPress={ () =>  
-                        navigation.navigate('GrievanceRegister')
-                    }
-                > 
-                    <Text style={styles.grievanceTxt}>Register a Grieviance</Text>
-                </Pressable>
+            <Image source={require('./images/logo1.png')}  style={styles.logo}/>
 
-                <Pressable style={styles.nsr}
-                    onPress={ () => 
-                        navigation.navigate('NsrRegister')
-                    }
-                > 
-                    <Text style={styles.grievanceTxt}>Register NSR Data</Text>
-                </Pressable>
-
-                <Image source={require('./images/logo1.png')}  style={styles.logo}/>
+            <Text>COMPLETED GRIEVANCE FORM</Text>
         </SafeAreaView>
     );
 };
 
-export default GrmForm;
+export default SavedForm;
 
 const styles = StyleSheet.create({
     header: {
@@ -67,12 +59,14 @@ const styles = StyleSheet.create({
         width: 100,
         height: 20,
         backgroundColor: "#052600",
-        top:7,
-        left:10
+        top: -10,
+        borderRadius: 5,
+        left:130
     },
 
     headerViewFormTxt: {
-        textAlign: 'center',
+        left: 30,
+        top: 8,
         color: 'white',
         fontSize: 13
     },
@@ -80,8 +74,7 @@ const styles = StyleSheet.create({
     headerViewSavedTxt: {
         color: 'white',
         fontSize: 13,
-        left: 150,
-        top:-13
+        textAlign: 'center',
     },
 
     headerViewAccountTxt: {
